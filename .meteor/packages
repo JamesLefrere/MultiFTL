@@ -3,3 +3,5 @@ iron-router
 scss
 npm
 streams
+accounts-ui
+accounts-password
