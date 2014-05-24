@@ -18,5 +18,7 @@ Template.game.helpers({
 });
 
 Template.game.events({
-
+  'mouseenter .beacon': function (e) {
+    Session.set('currentBeacon', $(e.currentTarget).data('id'));
+  }
 });
