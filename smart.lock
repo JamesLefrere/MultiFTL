@@ -6,7 +6,7 @@
       "scss": {},
       "npm": {},
       "streams": {},
-      "underscore-string": {}
+      "underscore-string-latest": {}
     },
     "packages": {
       "iron-router": {
@@ -29,10 +29,10 @@
         "tag": "v0.1.17",
         "commit": "9fcbbc9b7bf542827babc92089c19e730892a22f"
       },
-      "underscore-string": {
-        "git": "https://github.com/possibilities/meteor-underscore-string.git",
-        "tag": "v2.2.0rc.1",
-        "commit": "dec21fac23310daf76dc19f246749e7beb48af03"
+      "underscore-string-latest": {
+        "git": "https://github.com/TimHeckel/meteor-underscore-string.git",
+        "tag": "v2.3.3",
+        "commit": "4a5d70eee48fbd90a6e6fc78747250d704a0b3bb"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
