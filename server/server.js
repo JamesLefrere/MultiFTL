@@ -20,7 +20,7 @@ Meteor.methods({
     for (var i = 0; i < 16; i++) {
       var x = self.rng() * self.gameWidth;
       var y = self.rng() * self.gameHeight;
-      self.beacons.push({x: x, y: y});
+      self.beacons.push({id: i, x: x, y: y});
     }
 
     var game = Games.insert({
@@ -34,7 +34,7 @@ Meteor.methods({
 
     if (typeof game !== 'undefined') {
       return self.slug;
-    } else throw new Meteor.Error(403, 'Something went wrong');
+    } else throw new Meteor.Error(500, 'Something went wrong');
 
   }
 });
