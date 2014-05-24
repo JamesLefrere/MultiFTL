@@ -9,6 +9,9 @@
 
 <template name="layout">
   <div class="page">
-    {{>yield}}
+    <header class="header">{{> loginButtons}}</header>
+    <main class="main">
+      {{>yield}}
+    </main>
   </div>
 </template>
