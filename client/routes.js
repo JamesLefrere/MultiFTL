@@ -8,13 +8,13 @@ Router.map(function () {
     template: 'home'
   });
   this.route('game', {
-    path: 'game/:seed',
+    path: 'game/:slug',
     template: 'game',
     waitOn: function () {
-      return Meteor.subscribe('singleGame', this.params.seed);
+      return Meteor.subscribe('singleGame', this.params.slug);
     },
     data: function () {
-      return Games.findOne({ seed: this.params.seed });
+      return Games.findOne({ slug: this.params.slug });
     }
   });
 });

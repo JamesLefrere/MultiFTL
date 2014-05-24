@@ -1,3 +1,3 @@
-Meteor.publish('singleGame', function (seed) {
-  return Games.find({ seed: seed });
+Meteor.publish('singleGame', function (slug) {
+  return Games.find({ url: slug });
 });
