@@ -3,6 +3,7 @@
     "iron-router": {},
     "scss": {},
     "npm": {},
-    "streams": {}
+    "streams": {},
+    "underscore-string": {}
   }
 }
