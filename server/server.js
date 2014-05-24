@@ -18,11 +18,12 @@ Meteor.methods({
     var game = Games.insert({
       creator: self.userId,
       seed: self.seed,
-      time: self.time
+      time: self.time,
+      slug: _.slugify(self.seed)
     });
 
     if (typeof game !== 'undefined') {
-      return game;
+      return game.slug;
     } else throw new Meteor.Error(403, 'Something went wrong');
 
   }
