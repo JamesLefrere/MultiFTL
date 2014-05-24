@@ -1,3 +1,3 @@
 Meteor.publish('singleGame', function (slug) {
-  return Games.find({ url: slug });
+  return Games.find({ slug: slug });
 });
