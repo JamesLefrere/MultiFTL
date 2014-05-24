@@ -10,7 +10,7 @@ Template.createGame.events({
     var seed = t.$('#createGameSeed').val();
     Meteor.call('createGame', { seed: seed }, function (err, res) {
       if (!err) {
-        console.log(res);
+        Router.go('/game/' + res);
       } else console.log(err);
     });
   }
