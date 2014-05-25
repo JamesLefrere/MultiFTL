@@ -4,15 +4,19 @@
   <svg xmlns="http://www.w3.org/2000/svg"
        width="800" height="600"
        viewBox="0 0 800 600"
-       id="game">
-    {{#each connections}}
+       id="game"
+       data-width="3000"
+       data-height="2000">
+    <g class="viewport">
+      {{#each connections}}
       <line class="connection" x1="{{cx}}" y1="{{cy}}" x2="{{x}}" y2="{{y}}"></line>
-    {{/each}}
-    {{#each beacons}}
+      {{/each}}
+      {{#each beacons}}
       {{#if selected}}
       <circle class="beacon-background" r="8" cx="{{x}}" cy="{{y}}"></circle>
       {{/if}}
       <circle class="beacon{{#if selected}} is-selected{{/if}}" data-id="{{id}}" r="4" cx="{{x}}" cy="{{y}}"></circle>
-    {{/each}}
+      {{/each}}
+    </g>
   </svg>
 </template>
