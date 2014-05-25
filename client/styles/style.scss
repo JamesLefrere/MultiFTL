@@ -51,6 +51,7 @@
 
 #game {
   background: black;
+  font-family: courier, monospace;
 }
 
 .beacon {
@@ -74,4 +75,8 @@
   @include animation-duration(1s);
   @include animation-iteration-count(infinite);
   @include animation-direction(alternate);
+}
+
+.beacon-name {
+  fill: #aaa;
 }
