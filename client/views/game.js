@@ -4,7 +4,7 @@ Template.game.helpers({
       var beacons = [];
       var currentBeacon = this.beacons[Session.get('currentBeacon')];
       _.each(this.beacons, function (beacon) {
-        if (Math.pow(beacon.x - currentBeacon.x, 2) + Math.pow(beacon.y - currentBeacon.y, 2) <= 200*200)
+        if (Math.pow(beacon.x - currentBeacon.x, 2) + Math.pow(beacon.y - currentBeacon.y, 2) <= 400*400)
           beacons.push({ cx: currentBeacon.x, cy: currentBeacon.y, x: beacon.x, y: beacon.y });
       });
       return beacons;
