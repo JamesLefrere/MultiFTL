@@ -56,11 +56,12 @@ Meteor.methods({
     self.slug = _.slugify(self.seedString);
     self.time = (new Date()).getTime();
 
+    // @todo: remove magic numbers
     self.beacons = [];
     self.gameWidth = 3000;
     self.gameHeight = 2000;
 
-    for (var i = 0; i < 72; i++) {
+    for (var i = 0; i < 128; i++) {
       var x = self.rng() * self.gameWidth;
       var y = self.rng() * self.gameHeight;
       var name = new NameGenerator(self.rng(), 'beacon');
