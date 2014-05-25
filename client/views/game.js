@@ -35,11 +35,11 @@ Template.game.rendered = function () {
     maxZoom: 1
   });
   panZoom.setOnPan(function () {
-    var gutter = 100;
-    var maxRight = self.gameWidth - gutter;
-    var maxLeft = -self.gameWidth + gutter;
-    var maxTop = self.gameHeight - gutter;
-    var maxBottom = -self.gameHeight + gutter;
+    // @todo: remove magic numbers
+    var maxRight = 0;
+    var maxLeft = -self.gameWidth + 800;
+    var maxTop = 0;
+    var maxBottom = -self.gameHeight + 600;
     if (this.getPan().x > maxRight)
       this.pan({x: maxRight, y: this.getPan().y});
     if (this.getPan().x < maxLeft)
