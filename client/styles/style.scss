@@ -49,9 +49,12 @@
   }
 }
 
+body {
+  font-family: courier, monospace;
+}
+
 #game {
   background: black;
-  font-family: courier, monospace;
 }
 
 .beacon {
