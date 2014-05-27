@@ -68,10 +68,18 @@
 
 body {
   font-family: courier, monospace;
+  background: black;
+  color: #aaa;
+}
+
+.page {
+  width: 800px;
+  margin: 0 auto;
 }
 
 #game {
   background: black;
+  border: 1px #666 solid;
 }
 
 .beacon {
@@ -105,22 +113,63 @@ body {
   position: relative;
 }
 
-.hud {
-  position: absolute;
-  top: 0;
-  color: white;
-}
-
 .hud-bar {
-  width: 300px;
+  position: relative;
+  top: 2px;
+  width: 200px;
   height: 10px;
   border: 1px grey solid;
   .inner {
-    background: green;
+    background: white;
     width: 0;
     height: 100%;
   }
 }
 
+.hud-group {
+  @extend %clearfix;
+  position: absolute;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px #666 dotted;
+  font-size: 12px;
+  &.stats {
+    top: 0;
+  }
+  &.controls {
+    top: 0;
+    left: 255px;
+  }
+  &.weapons {
+    top: 0;
+    right: 5px;
+  }
+}
+
+.hud-group-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
 .hud-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  float: left;
+  clear: left;
+  margin-right: 5px;
+}
+
+.hud-bar, .hud-value {
+  float: left;
+  color: white;
+}
+
+.hud-control {
+  background: #666;
+  cursor: pointer;
+  padding: 5px;
+  &:hover {
+    color: white;
+    background: #aaa;
+  }
 }
