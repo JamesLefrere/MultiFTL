@@ -107,5 +107,42 @@ Meteor.methods({
       return self.slug;
     } else throw new Meteor.Error(500, 'Something went wrong');
 
+  },
+  'createShip': function (data) {
+    var self = this;
+
+    if (typeof data.name !== 'string' || typeof data.game !== 'string' || typeof data !== 'object')
+      throw new Meteor.Error(400, 'No data received');
+
+    self.rng = new SeedRandom(data.game.seedValue);
+
+    // @todo: validate no existing ship name, game in progress, no existing ship for this player in this game
+
+    var game = Games.findOne({_id: data.game});
+
+    var ship = Ships.insert({
+      owner: self.userId,
+      name: data.name,
+      game: data.game,
+      beacon: game.beacons[Math.floor(Math.random()*game.beacons.length)], // purposely not PRNG
+      // @todo: use these stats
+      stats: {
+        alive: true,
+        hull: 30,
+        fuel: 20,
+        money: 10,
+        arms: [
+          // @todo: remove hardcoded category, make this do something
+          (new WeaponGenerator(self.rng(), 'beam')).getWeapon(),
+          (new WeaponGenerator(self.rng(), 'laser')).getWeapon()
+        ],
+        crew: 4
+      }
+    });
+
+    if (typeof ship !== 'undefined') {
+      return ship;
+    } else throw new Meteor.Error(500, 'Something went wrong');
+  },
   }
 });
