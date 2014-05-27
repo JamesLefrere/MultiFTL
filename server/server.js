@@ -37,12 +37,46 @@ var RandomName = function (rng, category) {
 
   switch (category) {
     case 'beacon':
-      self.getFragment({ segments: 2, corpus: phonemes, titleCase: true, separator: ' ' });
-      self.getFragment({ segments: 1, corpus: greek });
+      self.getFragment({ segments: 2, corpus: vocabulary.phonemes, titleCase: true, separator: ' ' });
+      self.getFragment({ segments: 1, corpus: vocabulary.greek });
+      break;
+    case 'weapon':
+      self.getFragment({ segments: 2, corpus: vocabulary.adjectives, titleCase: true, separator: ' ' });
       break;
   }
 
+};
 
+var BeaconGenerator = function (rng, gameWidth, gameHeight, count) {
+  var self = this;
+  self.rng = new SeedRandom(rng);
+  self.beacons = [];
+
+  for (var i = 0; i < count; i++) {
+    var x = self.rng() * gameWidth;
+    var y = self.rng() * gameHeight;
+    var name = new RandomName(self.rng(), 'beacon');
+    self.beacons.push({id: i, name: name.getName(), x: x, y: y});
+  }
+
+  self.getBeacons = function () {
+    return self.beacons;
+  }
+};
+
+var WeaponGenerator = function (rng, category) {
+  var self = this;
+  self.rng = new SeedRandom(rng);
+  self.weapon = {
+    name: (new RandomName(self.rng(), 'weapon')).getName() + category,
+    // @todo: balance these numbers
+    damage: Math.round(self.rng() * 2),
+    rate: Math.round(self.rng() * 10000),
+    value: Math.round(self.rng() * 100)
+  };
+  self.getWeapon = function () {
+    return self.weapon;
+  }
 };
 
 Meteor.methods({
@@ -57,18 +91,8 @@ Meteor.methods({
     self.seedString = data.seed;
     self.slug = _.slugify(self.seedString);
     self.time = (new Date()).getTime();
-
     // @todo: remove magic numbers
-    self.beacons = [];
-    self.gameWidth = 3000;
-    self.gameHeight = 2000;
-
-    for (var i = 0; i < 128; i++) {
-      var x = self.rng() * self.gameWidth;
-      var y = self.rng() * self.gameHeight;
-      var name = new NameGenerator(self.rng(), 'beacon');
-      self.beacons.push({id: i, name: name.getName(), x: x, y: y});
-    }
+    self.beacons = (new BeaconGenerator(self.rng(), 3000, 2000, 128)).getBeacons();
 
     var game = Games.insert({
       creator: self.userId,
