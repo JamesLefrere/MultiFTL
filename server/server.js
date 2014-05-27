@@ -21,9 +21,7 @@ var RandomName = function (rng, category) {
     var fragment = '';
     for (i = 0; i < options.segments; i++) {
       var corpusLength = options.corpus.length;
-      var randomEntry = Math.round(self.rng() * corpusLength);
-      if (randomEntry > corpusLength)
-        randomEntry--;
+      var randomEntry = Math.floor(self.rng() * corpusLength);
       fragment += options.corpus[randomEntry];
     }
     if (options.titleCase)
