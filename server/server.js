@@ -1,9 +1,13 @@
 SeedRandom = Meteor.require('seedrandom');
 
-var phonemes = {};
-var greek = {};
-phonemes = JSON.parse(Assets.getText('phonemes.json'));
-greek = JSON.parse(Assets.getText('greek.json'));
+var vocabulary = {
+  phonemes: {},
+  greek: {},
+  adjectives: {}
+};
+vocabulary.phonemes = JSON.parse(Assets.getText('phonemes.json'));
+vocabulary.greek = JSON.parse(Assets.getText('greek.json'));
+vocabulary.adjectives = JSON.parse(Assets.getText('adjectives.json'));
 
 var NameGenerator = function (rng, category) {
   if (typeof rng !== 'number' || typeof category !== 'string')
