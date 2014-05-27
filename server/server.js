@@ -144,5 +144,37 @@ Meteor.methods({
       return ship;
     } else throw new Meteor.Error(500, 'Something went wrong');
   },
+  'move': function (data) {
+    var self = this;
+
+    if (typeof data.ship !== 'object' || typeof data.destination !== 'number')
+      throw new Meteor.Error(400, 'No data received');
+
+    self.game = Games.findOne(data.ship.game);
+    if (typeof self.game === 'undefined')
+      throw new Meteor.Error(404, 'Game not found');
+
+    // @todo: validate ship properties
+    if (data.ship.stats.fuel === 0)
+      throw new Meteor.Error(403, 'No fuel, yo');
+
+    // @todo: validate that destination is in range of origin
+    self.beacon = self.game.beacons[data.destination];
+    if (typeof self.beacon !== 'object')
+      throw new Meteor.Error(404, 'Beacon not found in this game');
+
+    if (data.ship.beacon.id === data.destination)
+      throw new Meteor.Error(403, 'You’re already there, yo');
+
+    Ships.update(data.ship._id, {
+      $set: {
+        beacon: self.beacon
+      },
+      $inc: {
+        'stats.fuel': -1
+      }
+    });
+
+    return data.ship;
   }
 });
