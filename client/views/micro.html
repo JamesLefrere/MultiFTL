@@ -1,0 +1,10 @@
+<template name="micro">
+  <g class="otherShipsHere">
+    {{#each otherShipsHere}}
+      <text fill="red" y="200">{{name}}</text>
+    {{/each}}
+  </g>
+  <g class="myShip">
+    <text fill="green" y="300">{{myShip.name}}</text>
+  </g>
+</template>

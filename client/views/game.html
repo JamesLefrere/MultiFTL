@@ -1,25 +1,27 @@
 <template name="game">
-  Game
-  <h3>Seed: {{seedString}}</h3>
-  <svg xmlns="http://www.w3.org/2000/svg"
-       width="800" height="600"
-       viewBox="0 0 800 600"
-       id="game"
-       data-width="3000"
-       data-height="2000">
-    <g class="viewport">
-      {{#each connections}}
-      <line class="connection" x1="{{cx}}" y1="{{cy}}" x2="{{x}}" y2="{{y}}"></line>
-      {{/each}}
-      {{#each beacons}}
-      {{#if selected}}
-      <circle class="beacon-background" r="8" cx="{{x}}" cy="{{y}}"></circle>
-      {{/if}}
-      <circle class="beacon{{#if selected}} is-selected{{/if}}" data-id="{{id}}" r="4" cx="{{x}}" cy="{{y}}"></circle>
-      {{#if selected}}
-      <text class="beacon-name"  transform="translate(10, 10)" x="{{x}}" y="{{y}}">{{name}}</text>
-      {{/if}}
-      {{/each}}
-    </g>
-  </svg>
+  {{> createShip}}
+  <h3>Seed: {{game.seedString}}</h3>
+  {{> myShip}}
+  {{> controls}}
+  <div class="game-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="800" height="600"
+         viewBox="0 0 800 600"
+         id="game"
+         data-width="3000"
+         data-height="2000">
+      <g class="viewport">
+        {{#if microView}}
+        {{> micro}}
+        {{else}}
+        {{> macro}}
+        {{/if}}
+      </g>
+    </svg>
+    {{#if microView}}
+    {{> microHud}}
+    {{else}}
+    {{> macroHud}}
+    {{/if}}
+  </div>
 </template>

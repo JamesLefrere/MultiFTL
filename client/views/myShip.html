@@ -1,0 +1,12 @@
+<template name="myShip">
+  <div class="my-ship">
+    <h4>My ship</h4>
+    {{#with myShip}}
+    <strong>{{name}}</strong><br>
+    At beacon: {{beacon.name}}<br>
+    {{#each stats.arms}}
+      {{> weapon}}
+    {{/each}}
+    {{/with}}
+  </div>
+</template>

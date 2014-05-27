@@ -83,3 +83,27 @@ body {
 .beacon-name {
   fill: #aaa;
 }
+
+.game-wrapper {
+  position: relative;
+}
+
+.hud {
+  position: absolute;
+  top: 0;
+  color: white;
+}
+
+.hud-bar {
+  width: 300px;
+  height: 10px;
+  border: 1px grey solid;
+  .inner {
+    background: green;
+    width: 0;
+    height: 100%;
+  }
+}
+
+.hud-label {
+}
