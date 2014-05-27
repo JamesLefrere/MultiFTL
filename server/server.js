@@ -114,11 +114,19 @@ Meteor.methods({
     if (typeof data.name !== 'string' || typeof data.game !== 'string' || typeof data !== 'object')
       throw new Meteor.Error(400, 'No data received');
 
-    self.rng = new SeedRandom(data.game.seedValue);
-
-    // @todo: validate no existing ship name, game in progress, no existing ship for this player in this game
-
     var game = Games.findOne({_id: data.game});
+
+    var existingPlayerShipInThisGame = Ships.find({ owner: this.userId }).fetch;
+    if (existingPlayerShipInThisGame.length)
+      throw new Meteor.Error(403, 'You can’t have more than one ship in a game');
+
+    var existingShipWithThisName = Ships.find({ name: data.name, game: data.game }).fetch();
+    if (existingShipWithThisName.length)
+      throw new Meteor.Error(403, 'There is already a ship with this name in this game');
+
+    // @todo: validate game in progress
+
+    self.rng = new SeedRandom(data.game.seedValue);
 
     var ship = Ships.insert({
       owner: self.userId,
