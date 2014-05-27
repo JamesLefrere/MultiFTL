@@ -1,5 +1,7 @@
 <template name="macroHud">
-  <div class="hud macro">
+  {{> controls}}
+  <div class="hud-group stats">
+    <div class="hud-group-label">{{myShip.name}}</div>
     <div class="hud-label">Fuel</div>
     <div class="hud-bar fuel">
       <div class="inner" style="width: {{myShip.stats.fuel}}%"></div>

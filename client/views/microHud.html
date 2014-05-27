@@ -1,12 +1,24 @@
 <template name="microHud">
   <div class="hud micro">
-    <div class="hud-label">Fuel</div>
-    <div class="hud-bar fuel">
-      <div class="inner" style="width: {{myShip.stats.fuel}}%"></div>
+    {{> controls}}
+    <div class="hud-group stats">
+      <div class="hud-group-label">{{myShip.name}}</div>
+      <div class="hud-label">Fuel</div>
+      <div class="hud-bar fuel">
+        <div class="inner" style="width: {{myShip.stats.fuel}}%"></div>
+      </div>
+      <div class="hud-label">Hull</div>
+      <div class="hud-bar hull">
+        <div class="inner" style="width: {{myShip.stats.hull}}%"></div>
+      </div>
+      <div class="hud-label">Beacon</div>
+      <div class="hud-value">{{myShip.beacon.name}}</div>
     </div>
-    <div class="hud-label">Hull</div>
-    <div class="hud-bar hull">
-      <div class="inner" style="width: {{myShip.stats.hull}}%"></div>
+    <div class="hud-group weapons">
+      <div class="hud-group-label">Weapons</div>
+      {{#each myShip.stats.arms}}
+      {{> weapon}}
+      {{/each}}
     </div>
   </div>
 </template>
