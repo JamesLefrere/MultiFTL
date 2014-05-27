@@ -1,0 +1,12 @@
+<template name="microHud">
+  <div class="hud micro">
+    <div class="hud-label">Fuel</div>
+    <div class="hud-bar fuel">
+      <div class="inner" style="width: {{myShip.stats.fuel}}%"></div>
+    </div>
+    <div class="hud-label">Hull</div>
+    <div class="hud-bar hull">
+      <div class="inner" style="width: {{myShip.stats.hull}}%"></div>
+    </div>
+  </div>
+</template>
