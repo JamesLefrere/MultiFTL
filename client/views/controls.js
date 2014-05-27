@@ -8,7 +8,7 @@ Template.controls.helpers({
 });
 
 Template.controls.events({
-  'click .control': function (e) {
+  'click .hud-control': function (e) {
     e.preventDefault();
     var $this = $(e.currentTarget);
     switch ($this.data('action')) {
