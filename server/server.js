@@ -9,7 +9,7 @@ vocabulary.phonemes = JSON.parse(Assets.getText('phonemes.json'));
 vocabulary.greek = JSON.parse(Assets.getText('greek.json'));
 vocabulary.adjectives = JSON.parse(Assets.getText('adjectives.json'));
 
-var NameGenerator = function (rng, category) {
+var RandomName = function (rng, category) {
   if (typeof rng !== 'number' || typeof category !== 'string')
     throw new Meteor.Error(500, 'Could not generate name');
 
