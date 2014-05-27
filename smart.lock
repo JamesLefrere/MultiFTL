@@ -6,7 +6,8 @@
       "scss": {},
       "npm": {},
       "streams": {},
-      "underscore-string-latest": {}
+      "underscore-string-latest": {},
+      "session-extended-api": {}
     },
     "packages": {
       "iron-router": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/TimHeckel/meteor-underscore-string.git",
         "tag": "v2.3.3",
         "commit": "4a5d70eee48fbd90a6e6fc78747250d704a0b3bb"
+      },
+      "session-extended-api": {
+        "git": "https://github.com/awatson1978/session-extended-api.git",
+        "tag": "v0.1.3",
+        "commit": "7b13174d54a9ff04001cbe5387e08c0d776342aa"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
