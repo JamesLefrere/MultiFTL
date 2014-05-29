@@ -85,8 +85,13 @@ body {
 .beacon {
   fill: white;
   cursor: pointer;
+  &.is-current {
+    fill: #aaa;
+  }
   &.is-selected {
-    fill: magenta;
+    stroke-width: 4px;
+    stroke: white;
+    fill: #aaa;
   }
 }
 
@@ -98,11 +103,16 @@ body {
 .connection {
   opacity: 0;
   stroke-width: 1px;
-  stroke: #888;
+  stroke: #666;
   @include animation-name(fadeIn);
   @include animation-duration(1s);
   @include animation-iteration-count(infinite);
   @include animation-direction(alternate);
+}
+
+.jump-connection {
+  stroke-width: 2px;
+  stroke: #fff;
 }
 
 .beacon-name {
@@ -130,8 +140,8 @@ body {
   @extend %clearfix;
   position: absolute;
   padding: 5px;
-  margin-bottom: 5px;
-  border: 1px #666 dotted;
+  margin: 1px;
+  background: rgba(black, 0.6);
   font-size: 12px;
   &.stats {
     top: 0;
@@ -172,4 +182,9 @@ body {
     color: white;
     background: #aaa;
   }
+}
+
+.outline {
+  stroke: #b7ff00;
+  stroke-width: 2px;
 }

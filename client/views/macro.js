@@ -3,26 +3,41 @@ Template.macro.helpers({
     return Session.get('myShip');
   },
   connections: function () {
-    if (typeof Session.get('currentBeacon') !== 'undefined' && typeof this.game !== 'undefined') {
+    if (typeof Session.get('selectedBeacon') !== 'undefined' && typeof this.game !== 'undefined') {
       var beacons = [];
-      var currentBeacon = this.game.beacons[Session.get('currentBeacon')];
+      var selectedBeacon = this.game.beacons[Session.get('selectedBeacon')];
       _.each(this.game.beacons, function (beacon) {
-        if (Math.pow(beacon.x - currentBeacon.x, 2) + Math.pow(beacon.y - currentBeacon.y, 2) <= 400*400)
-          beacons.push({ cx: currentBeacon.x, cy: currentBeacon.y, x: beacon.x, y: beacon.y });
+        if (Math.pow(beacon.x - selectedBeacon.x, 2) + Math.pow(beacon.y - selectedBeacon.y, 2) <= 400*400)
+          beacons.push({ cx: selectedBeacon.x, cy: selectedBeacon.y, x: beacon.x, y: beacon.y });
       });
       return beacons;
     }
   },
-  selected: function () {
+  isSelected: function () {
+    if (typeof Session.get('selectedBeacon') !== 'undefined') {
+      return Session.get('selectedBeacon') === this.id;
+    }
+  },
+  isCurrent: function () {
     if (typeof Session.get('currentBeacon') !== 'undefined') {
       return Session.get('currentBeacon') === this.id;
+    }
+  },
+  selectedBeacon: function () {
+    if (typeof Session.get('selectedBeacon') !== 'undefined' && typeof this.game !== 'undefined') {
+      return this.game.beacons[Session.get('selectedBeacon')];
+    }
+  },
+  currentBeacon: function () {
+    if (typeof Session.get('currentBeacon') !== 'undefined' && typeof this.game !== 'undefined') {
+      return this.game.beacons[Session.get('currentBeacon')];
     }
   }
 });
 
 Template.macro.events({
   'mouseenter .beacon': function (e) {
-    Session.set('currentBeacon', $(e.currentTarget).data('id'));
+    Session.set('selectedBeacon', $(e.currentTarget).data('id'));
   },
   'click .beacon': function (e) {
     Session.set('currentBeacon', $(e.currentTarget).data('id'));
@@ -32,7 +47,7 @@ Template.macro.events({
       destination: Session.get('currentBeacon')
     }, function (err, res) {
       if (!err) {
-        console.log(res);
+        console.log('Moved the ship');
         Session.set('currentView', 'micro');
       } else console.log(err);
     });

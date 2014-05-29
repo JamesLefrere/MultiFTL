@@ -1,6 +1,7 @@
 <template name="game">
+  {{#if createdShip}}
   {{> createShip}}
-  <h3>Seed: {{game.seedString}}</h3>
+  {{/if}}
   <div class="game-wrapper">
     <svg xmlns="http://www.w3.org/2000/svg"
          width="800" height="600"
@@ -21,5 +22,8 @@
     {{else}}
     {{> macroHud}}
     {{/if}}
+  </div>
+  <div class="chat-wrapper">
+    {{> gameChat}}
   </div>
 </template>

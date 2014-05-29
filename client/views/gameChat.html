@@ -1,0 +1,10 @@
+<template name="gameChat">
+  <div class="messages">
+    {{#each chatMessages}}
+      {{username}}: {{message}}<br>
+    {{/each}}
+  </div>
+  <form id="chat" action="">
+    <input type="text" id="chatText" name="chatText" placeholder="Enter message" />
+  </form>
+</template>

@@ -79,6 +79,60 @@ var WeaponGenerator = function (rng, category) {
   }
 };
 
+var EnginesGenerator = function (rng) {
+  var self = this;
+  self.rng = new SeedRandom(rng);
+
+  self.randomIsh = function (value, ish) {
+    return Math.floor(self.rng() * ((value + ish) - (value - ish)) + value - ish);
+  };
+
+  self.engines = {
+    regenRate: self.randomIsh(60, 10),
+    speed: self.randomIsh(5, 1)
+  };
+
+  // m72,163l43,-44l252,0l162,81l-178,113l-169,-117l-89,0l-21,-33z
+  self.paths = [
+
+  ];
+
+  self.getEngines = function () {
+    return self.engines;
+  };
+
+  self.getPath = function () {
+    return self.paths[Math.floor(self.rng() * self.paths.length)];
+  };
+};
+
+var ShipLayoutGenerator = function (name) {
+  var self = this;
+  self.rng = new SeedRandom(name);
+
+  self.randomIsh = function (value, ish) {
+    return Math.floor(self.rng() * ((value + ish) - (value - ish)) + value - ish);
+  };
+
+  // m72,163l43,-44l252,0l162,81l-178,113l-169,-117l-89,0l-21,-33z
+  self.pathSegments = [
+    'm' + self.randomIsh(72, 25) + ',' + self.randomIsh(163, 10),
+    'l' + self.randomIsh(43, 10) + ',' + self.randomIsh(-44, 10),
+    'l' + self.randomIsh(260, 25) + ',' + '0',
+    'l' + self.randomIsh(162, 15) + ',' + self.randomIsh(80, 25),
+    'l' + self.randomIsh(-178, 25) + ',' + self.randomIsh(80, 25),
+    'l' + self.randomIsh(-169, 5) + ',' + self.randomIsh(-117, 5) + 'z'
+  ];
+
+  self.getPathSegments = function () {
+    return self.pathSegments;
+  };
+
+  self.getPath = function () {
+    return self.pathSegments.join(',');
+  };
+};
+
 Meteor.methods({
   'createGame': function (data) {
     var self = this;
@@ -128,11 +182,14 @@ Meteor.methods({
 
     self.rng = new SeedRandom(data.game.seedValue);
 
+    self.shipLayout = new ShipLayoutGenerator(data.name);
+
     var ship = Ships.insert({
       owner: self.userId,
       name: data.name,
       game: data.game,
       beacon: game.beacons[Math.floor(Math.random()*game.beacons.length)], // purposely not PRNG
+      path: self.shipLayout.getPath(),
       // @todo: use these stats
       stats: {
         alive: true,

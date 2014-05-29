@@ -2,12 +2,13 @@
   {{#each connections}}
   <line class="connection" x1="{{cx}}" y1="{{cy}}" x2="{{x}}" y2="{{y}}"></line>
   {{/each}}
+  <line class="jump-connection" x1="{{currentBeacon.x}}" y1="{{currentBeacon.y}}" x2="{{selectedBeacon.x}}" y2="{{selectedBeacon.y}}"></line>
   {{#each game.beacons}}
-  {{#if selected}}
+  {{#if isCurrent}}
   <circle class="beacon-background" r="8" cx="{{x}}" cy="{{y}}"></circle>
   {{/if}}
-  <circle class="beacon{{#if selected}} is-selected{{/if}}" data-id="{{id}}" r="4" cx="{{x}}" cy="{{y}}"></circle>
-  {{#if selected}}
+  <circle class="beacon{{#if isSelected}} is-selected{{/if}}{{#if isCurrent}} is-current{{/if}}" data-id="{{id}}" r="4" cx="{{x}}" cy="{{y}}"></circle>
+  {{#if isSelected}}
   <text class="beacon-name"  transform="translate(10, 10)" x="{{x}}" y="{{y}}">{{name}}</text>
   {{/if}}
   {{/each}}

@@ -5,6 +5,9 @@ Template.game.created = function () {
 Template.game.helpers({
   microView: function () {
     return Session.get('viewMode');
+  },
+  createdShip: function () {
+    return Session.get('myShip') === undefined;
   }
 });
 
